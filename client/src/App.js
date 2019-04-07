@@ -16,7 +16,7 @@ class App extends Component {
   }
 
 componentDidMount() {
-    axios.get('http://localhost:8050/api/todos')
+    axios.get('/api/todos')
         .then(res => {
         console.log(res)
         this.setState({todos: res.data})
@@ -25,7 +25,7 @@ componentDidMount() {
 
   markComplete = (_id) => {
       console.log(_id)
-      axios.put(`http://localhost:8050/api/todos/${_id}`)
+      axios.put(`/api/todos/${_id}`)
       .then(this.setState({todos: this.state.todos.map(todo => {
       if(todo._id===_id) {
         todo.completed = !todo.completed
@@ -41,13 +41,13 @@ componentDidMount() {
   
   delTodo = (_id) => {
       console.log(_id)
-      axios.delete(`http://localhost:8050/api/todos/${_id}`)
+      axios.delete(`/api/todos/${_id}`)
     .then(res => this.setState({todos: [...this.state.todos.filter(todo => todo._id!==_id)]}))
       
   }
   
   addTodo = (title) => {
-          axios.post('http://localhost:8050/api/todos', {
+          axios.post('/api/todos', {
           title,
           completed: false
       })
